@@ -21,11 +21,11 @@ public class LinkedList {
     System.out.println("Len:");
     System.out.println("expected: 3, actual: " + staticSequence.len());
 
-    // O(1)
+    // O(n)
     System.out.println("Get:");
     System.out.println("expected: 2, actual: " + staticSequence.get_at(1));
 
-    // O(1)
+    // O(n)
     System.out.println("Set:");
     staticSequence.set_at(1, 5);
     System.out.println("expected: 5, actual: " + staticSequence.get_at(1));
