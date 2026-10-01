@@ -9,29 +9,179 @@ public class LinkedList {
     System.out.println("Initial array:");
     System.out.println(Arrays.toString(data));
 
-    StaticSequenceInterface staticSequence = new LinkedListImpl();
+    LinkedListImpl linkedList = new LinkedListImpl();
     // O(n)
-    staticSequence.build(data);
+    linkedList.build(data);
     System.out.println("Data structure:");
     // O(n)
     System.out.println(
-        "expected: [3, 2, 4], actual: " + Arrays.toString(staticSequence.iter_seq()));
+        "expected: [3, 2, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
 
     // O(1)
     System.out.println("Len:");
-    System.out.println("expected: 3, actual: " + staticSequence.len());
+    System.out.println("expected: 3, actual: " + linkedList.len());
 
     // O(n)
     System.out.println("Get:");
-    System.out.println("expected: 2, actual: " + staticSequence.get_at(1));
+    System.out.println("expected: 2, actual: " + linkedList.get_at(1));
 
     // O(n)
     System.out.println("Set:");
-    staticSequence.set_at(1, 5);
-    System.out.println("expected: 5, actual: " + staticSequence.get_at(1));
+    linkedList.set_at(1, 5);
+    System.out.println("expected: [3, 5, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(n)
+    System.out.println("Insert_at:");
+    linkedList.insert_at(1, 9);
+    linkedList.insert_at(0, 0);
+    System.out.println("expected: [0, 3, 9, 5, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(1)
+    System.out.println("Insert_first:");
+    linkedList.insert_first(-1);
+    System.out.println("expected: [-1, 0, 3, 9, 5, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(n)
+    System.out.println("Insert_last:");
+    linkedList.insert_last(6);
+    System.out.println("expected: [-1, 0, 3, 9, 5, 4, 6], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(1)
+    System.out.println("Delete_first:");
+    linkedList.delete_first();
+    System.out.println("expected: [0, 3, 9, 5, 4, 6], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(n)
+    System.out.println("Delete_last:");
+    linkedList.delete_last();
+    System.out.println("expected: [0, 3, 9, 5, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    // O(n)
+    System.out.println("Delete_at:");
+    linkedList.delete_at(2);
+    System.out.println("expected: [0, 3, 5, 4], actual: " + Arrays.toString(linkedList.iter_seq()));
+
+    System.out.println("Delete on empty:");
+    linkedList.delete_last();
+    linkedList.delete_last();
+    linkedList.delete_last();
+    linkedList.delete_last();
+    linkedList.delete_last();
+    linkedList.delete_first();
+    System.out.println(Arrays.toString(linkedList.iter_seq()));
+
+    System.out.println("Insert_first on empty");
+    linkedList.insert_first(1);
+    System.out.println("expected: [1], actual: " + Arrays.toString(linkedList.iter_seq()));
   }
 
-  static class LinkedListImpl implements StaticSequenceInterface {
+  static class LinkedListImpl implements StaticSequenceInterface, DynamicSequenceInterface {
+
+    @Override
+    public void insert_at(int i, int x) {
+      if (i == 0) {
+        insert_first(x);
+        return;
+      }
+      // 3
+      Node curr = head;
+      // 5
+      for (int j = 0; j < i; j++) {
+        curr = curr.next;
+      }
+
+      Node toInsert = new Node(x);
+      // 5
+      toInsert.next = curr;
+
+      Node prev = head;
+      while (prev.next != curr) {
+        prev = prev.next;
+      }
+      prev.next = toInsert;
+      len++;
+    }
+
+    @Override
+    public void delete_at(int i) {
+      if (i == 0) {
+        delete_first();
+        return;
+      }
+      if (i == len - 1) {
+        delete_last();
+        return;
+      }
+      // 1 2 3
+      // 1
+      Node curr = head;
+      for (int j = 0; j < i; j++) {
+        curr = curr.next;
+      }
+      // curr 2
+      Node prev = head;
+      while (prev.next != curr) {
+        prev = prev.next;
+      }
+      prev.next = curr.next;
+      curr.next = null;
+      len--;
+    }
+
+    @Override
+    public void insert_first(int x) {
+      Node toInsert = new Node(x);
+      toInsert.next = head;
+      head = toInsert;
+      len++;
+    }
+
+    @Override
+    public void insert_last(int x) {
+      if (head == null) {
+        head = new Node(x);
+        len++;
+        return;
+      }
+      Node curr = head;
+      while (curr.next != null) {
+        curr = curr.next;
+      }
+      curr.next = new Node(x);
+      len++;
+    }
+
+    @Override
+    public void delete_first() {
+      if (head == null) {
+        return;
+      }
+      head = head.next;
+      len--;
+    }
+
+    @Override
+    public void delete_last() {
+      if (head == null) {
+        return;
+      }
+      if (len == 1) {
+        head = null;
+        len--;
+        return;
+      }
+      Node curr = head;
+      while (curr.next != null) {
+        curr = curr.next;
+      }
+
+      Node newLast = head;
+      while (newLast.next != curr) {
+        newLast = newLast.next;
+      }
+      newLast.next = null;
+      len--;
+    }
 
     static class Node {
 

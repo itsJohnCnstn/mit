@@ -6,9 +6,9 @@ public interface DynamicSequenceInterface {
 
   void delete_at(int i);
 
-  void insert_first();
+  void insert_first(int x);
 
-  void insert_last();
+  void insert_last(int x);
 
   void delete_first();
 
