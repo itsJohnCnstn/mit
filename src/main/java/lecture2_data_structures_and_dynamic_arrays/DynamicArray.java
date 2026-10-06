@@ -81,7 +81,7 @@ public class DynamicArray {
     System.out.println("expected: [1], actual: " + Arrays.toString(dynamicArray.iter_seq()));
   }
 
-  static class DynamicArrayImpl implements StaticSequenceInterface, DynamicSequenceInterface {
+  public static class DynamicArrayImpl implements StaticSequenceInterface, DynamicSequenceInterface {
 
     int size;
     int len;
