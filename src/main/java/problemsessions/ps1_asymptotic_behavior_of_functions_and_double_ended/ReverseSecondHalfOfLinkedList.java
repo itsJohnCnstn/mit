@@ -1,4 +1,4 @@
-package problemsession1_asymptotic_behavior_of_functions_and_double_ended;
+package problemsessions.ps1_asymptotic_behavior_of_functions_and_double_ended;
 
 public class ReverseSecondHalfOfLinkedList {
 

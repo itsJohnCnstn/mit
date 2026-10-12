@@ -1,4 +1,4 @@
-package lecture2_data_structures_and_dynamic_arrays;
+package lectures.l2_data_structures_and_dynamic_arrays;
 
 interface StaticSequenceInterface {
 

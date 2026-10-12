@@ -1,8 +1,8 @@
-package problemsession1_asymptotic_behavior_of_functions_and_double_ended;
+package problemsessions.ps1_asymptotic_behavior_of_functions_and_double_ended;
 
 import java.util.Arrays;
 
-public class ArrayDequeAddFirstRemoveFirstGetIInO1 {
+public class AddFirstRemoveFirstGetIInO1 {
 
   static void main() {
     DoublyDynamicArrayImpl dynamicArray = new DoublyDynamicArrayImpl();

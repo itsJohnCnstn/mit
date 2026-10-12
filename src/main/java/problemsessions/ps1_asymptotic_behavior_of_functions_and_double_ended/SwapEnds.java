@@ -1,7 +1,7 @@
-package problemsession1_asymptotic_behavior_of_functions_and_double_ended;
+package problemsessions.ps1_asymptotic_behavior_of_functions_and_double_ended;
 
 import java.util.Arrays;
-import lecture2_data_structures_and_dynamic_arrays.DynamicArray.DynamicArrayImpl;
+import lectures.l2_data_structures_and_dynamic_arrays.DynamicArray.DynamicArrayImpl;
 
 public class SwapEnds {
 
